@@ -1,51 +1,31 @@
-﻿namespace AOC
+﻿using AOC.Solutions;
+using FuncSharp;
+
+namespace AOC
 {
     internal static class Program
     {
         static void Main(string[] args)
         {
-            Day1();
-        }
-
-        private static void Day1()
-        {
-            var lines = GetInputLines(1);
-            var partitions = PartitionByBlanks(lines);
-            var sums = partitions.Select(p => p.Select(l => Int32.Parse(l)).Sum());
-            var leaderboard = sums.OrderByDescending(s => s).ToList();
-
-            Console.WriteLine($"1.1 - {leaderboard[0]}");
-            Console.WriteLine($"1.2 - {leaderboard[0] + leaderboard[1] + leaderboard[2]}");
-        }
-
-        private static IEnumerable<IEnumerable<string>> PartitionByBlanks(IEnumerable<string> lines)
-        {
-            var partition = new List<string>();
-            foreach (var line in lines)
+            for (var day = 1; day <= 25; day++)
             {
-                if (String.IsNullOrEmpty(line))
-                {
-                    if (partition.Any())
-                    {
-                        yield return partition;
-                        partition = new List<string>();
-                    }
-                }
-                else
-                {
-                    partition.Add(line);
-                }
-            }
+                var solverType = Type.GetType($"{nameof(AOC)}.{nameof(Solutions)}.Day{day}").ToOption();
+                var solver = solverType.Map(t => (ISolver)Activator.CreateInstance(t));
 
-            if (partition.Any())
-            {
-                yield return partition;
+                solver.Match(s => Solve(day, s));                
             }
         }
 
-        private static IEnumerable<string> GetInputLines(int day)
+        private static void Solve(int day, ISolver solver)
         {
-            return File.ReadAllLines($"Inputs/{day}.txt");
+            var input = File.ReadAllLines($"Inputs/{day}.txt");
+            var results = solver.Solve(input);
+            var outputs = results.Select((r, i) => $"{day}.{i + 1} - {r}");
+            
+            foreach (var output in outputs)
+            {
+                Console.WriteLine(output);
+            }
         }
     }
 }

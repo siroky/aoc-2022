@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FuncSharp" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Inputs\2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Inputs\1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
