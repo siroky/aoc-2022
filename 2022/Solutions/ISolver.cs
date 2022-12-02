@@ -1,7 +1,6 @@
-﻿namespace AOC.Solutions
+﻿namespace AOC.Solutions;
+
+public interface ISolver
 {
-    public interface ISolver
-    {
-        IEnumerable<int> Solve(IEnumerable<string> input);
-    }
+    IEnumerable<int> Solve(IEnumerable<string> input);
 }

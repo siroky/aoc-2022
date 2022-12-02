@@ -1,40 +1,39 @@
-﻿namespace AOC.Solutions
-{
-    public class Day1 : ISolver
-    {
-        public IEnumerable<int> Solve(IEnumerable<string> input)
-        {
-            var partitions = PartitionByBlanks(input);
-            var sums = partitions.Select(p => p.Select(l => Int32.Parse(l)).Sum());
-            var leaderboard = sums.OrderByDescending(s => s).ToList();
+﻿namespace AOC.Solutions;
 
-            yield return leaderboard[0];
-            yield return leaderboard[0] + leaderboard[1] + leaderboard[2];
+public class Day1 : ISolver
+{
+    public IEnumerable<int> Solve(IEnumerable<string> input)
+    {
+        var partitions = ParseInput(input);
+        var sums = partitions.Select(p => p.Sum());
+        var leaderboard = sums.OrderByDescending(s => s).ToList();
+
+        yield return leaderboard[0];
+        yield return leaderboard[0] + leaderboard[1] + leaderboard[2];
+    }
+
+    private IEnumerable<IEnumerable<int>> ParseInput(IEnumerable<string> lines)
+    {
+        var partition = new List<int>();
+        foreach (var line in lines)
+        {
+            if (String.IsNullOrEmpty(line))
+            {
+                if (partition.Any())
+                {
+                    yield return partition;
+                    partition = new List<int>();
+                }
+            }
+            else
+            {
+                partition.Add(Int32.Parse(line));
+            }
         }
 
-        private IEnumerable<IEnumerable<string>> PartitionByBlanks(IEnumerable<string> lines)
+        if (partition.Any())
         {
-            var partition = new List<string>();
-            foreach (var line in lines)
-            {
-                if (String.IsNullOrEmpty(line))
-                {
-                    if (partition.Any())
-                    {
-                        yield return partition;
-                        partition = new List<string>();
-                    }
-                }
-                else
-                {
-                    partition.Add(line);
-                }
-            }
-
-            if (partition.Any())
-            {
-                yield return partition;
-            }
+            yield return partition;
         }
     }
 }
