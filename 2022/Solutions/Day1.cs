@@ -2,9 +2,9 @@
 
 public class Day1 : ISolver
 {
-    public IEnumerable<int> Solve(IEnumerable<string> input)
+    public IEnumerable<int> Solve(IEnumerable<string> lines)
     {
-        var partitions = ParseInput(input);
+        var partitions = ParseInput(lines);
         var sums = partitions.Select(p => p.Sum());
         var leaderboard = sums.OrderByDescending(s => s).ToList();
 

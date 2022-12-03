@@ -16,7 +16,6 @@ internal static class Program
         }
     }
 
-
     private static void Solve(int day, ISolver solver)
     {
         var input = File.ReadAllLines($"Inputs/{day}.txt");

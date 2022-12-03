@@ -4,10 +4,10 @@ namespace AOC.Solutions;
 
 public class Day2 : ISolver
 {
-    public IEnumerable<int> Solve(IEnumerable<string> input)
+    public IEnumerable<int> Solve(IEnumerable<string> lines)
     {
-        yield return input.Select(i => ScoreStrategy1(i)).Sum();
-        yield return input.Select(i => ScoreStrategy2(i)).Sum();
+        yield return lines.Sum(l => ScoreStrategy1(l));
+        yield return lines.Sum(l => ScoreStrategy2(l));
     }
 
     private int ScoreStrategy1(string line)
