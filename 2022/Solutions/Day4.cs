@@ -1,12 +1,10 @@
-﻿using FuncSharp;
-
-namespace AOC.Solutions;
+﻿namespace AOC.Solutions;
 
 public class Day4 : ISolver
 {
     private static readonly ComparableTotalOrder<int> Intervals = new ComparableTotalOrder<int>();
 
-    public IEnumerable<int> Solve(IEnumerable<string> lines)
+    public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
         var intervalPairs = lines.Select(l => ParseIntervals(l));
         var containingPairs = intervalPairs.Where(p =>
@@ -15,8 +13,8 @@ public class Day4 : ISolver
         );
         var overlappingPairs = intervalPairs.Where(p => Intervals.Intersects(p.Item1, p.Item2));
 
-        yield return containingPairs.Count();
-        yield return overlappingPairs.Count();
+        yield return containingPairs.Count().ToString();
+        yield return overlappingPairs.Count().ToString();
     }
 
     private (Interval<int>, Interval<int>) ParseIntervals(string line)

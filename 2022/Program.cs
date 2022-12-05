@@ -1,5 +1,4 @@
 ﻿using AOC.Solutions;
-using FuncSharp;
 
 namespace AOC;
 

@@ -2,5 +2,5 @@
 
 public interface ISolver
 {
-    IEnumerable<int> Solve(IEnumerable<string> lines);
+    IEnumerable<string> Solve(IEnumerable<string> lines);
 }

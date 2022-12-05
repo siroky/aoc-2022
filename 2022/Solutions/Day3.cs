@@ -1,16 +1,14 @@
-﻿using FuncSharp;
-
-namespace AOC.Solutions;
+﻿namespace AOC.Solutions;
 
 public class Day3 : ISolver
 {
-    public IEnumerable<int> Solve(IEnumerable<string> lines)
+    public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
         var compartmentGroups = lines.Select(l => l.Chunk(l.Length / 2));
         var rucksackGroups = lines.Chunk(3);
 
-        yield return DuplicatePriority(compartmentGroups);
-        yield return DuplicatePriority(rucksackGroups);
+        yield return DuplicatePriority(compartmentGroups).ToString();
+        yield return DuplicatePriority(rucksackGroups).ToString();
     }
 
     private int DuplicatePriority(IEnumerable<IEnumerable<IEnumerable<char>>> groups)

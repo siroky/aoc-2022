@@ -1,13 +1,11 @@
-﻿using FuncSharp;
-
-namespace AOC.Solutions;
+﻿namespace AOC.Solutions;
 
 public class Day2 : ISolver
 {
-    public IEnumerable<int> Solve(IEnumerable<string> lines)
+    public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
-        yield return lines.Sum(l => ScoreStrategy1(l));
-        yield return lines.Sum(l => ScoreStrategy2(l));
+        yield return lines.Sum(l => ScoreStrategy1(l)).ToString();
+        yield return lines.Sum(l => ScoreStrategy2(l)).ToString();
     }
 
     private int ScoreStrategy1(string line)
