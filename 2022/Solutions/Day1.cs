@@ -8,8 +8,8 @@ public class Day1 : ISolver
         var sums = partitions.Select(p => p.Sum());
         var leaderboard = sums.OrderByDescending(s => s).ToList();
 
-        yield return leaderboard[0].ToString();
-        yield return (leaderboard[0] + leaderboard[1] + leaderboard[2]).ToString();
+        yield return leaderboard.First().ToString();
+        yield return leaderboard.Take(3).Sum().ToString();
     }
 
     private IEnumerable<IEnumerable<int>> ParseInput(IEnumerable<string> lines)

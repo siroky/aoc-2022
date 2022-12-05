@@ -10,8 +10,8 @@ public class Day2 : ISolver
 
     private int ScoreStrategy1(string line)
     {
-        var opponent = ParseOpponent(line[0]);
-        var player = ParsePlayer(line[2]);
+        var opponent = ParseMove(line[0]);
+        var player = ParseMove(line[2]);
         var result = Game.Results.Get(player, opponent).Get();
 
         return (int)player + (int)result;
@@ -19,31 +19,24 @@ public class Day2 : ISolver
 
     private int ScoreStrategy2(string line)
     {
-        var opponent = ParseOpponent(line[0]);
+        var opponent = ParseMove(line[0]);
         var result = ParseResult(line[2]);
         var player = Game.Players.Get(opponent, result).Get();
 
         return (int)player + (int)result;
     }
 
-    private Move ParseOpponent(char c)
+    private Move ParseMove(char c)
     {
         return c.Match(
             'A', _ => Move.Rock,
             'B', _ => Move.Paper,
-            'C', _ => Move.Scissors
-        );
-    }
-
-    private Move ParsePlayer(char c)
-    {
-        return c.Match(
+            'C', _ => Move.Scissors,
             'X', _ => Move.Rock,
             'Y', _ => Move.Paper,
             'Z', _ => Move.Scissors
         );
     }
-
     private Result ParseResult(char c)
     {
         return c.Match(
@@ -52,6 +45,20 @@ public class Day2 : ISolver
             'Z', _ => Result.Win
         );
     }
+}
+
+public enum Move
+{
+    Rock = 1,
+    Paper = 2,
+    Scissors = 3
+}
+
+public enum Result
+{
+    Loss = 0,
+    Draw = 3,
+    Win = 6
 }
 
 public static class Game
@@ -80,18 +87,4 @@ public static class Game
         Results = States.ToDataCube(s => s.Item1, s => s.Item2, s => s.Item3);
         Players = States.ToDataCube(s => s.Item2, s => s.Item3, s => s.Item1);
     }
-}
-
-public enum Move
-{
-    Rock = 1,
-    Paper = 2,
-    Scissors = 3
-}
-
-public enum Result
-{
-    Loss = 0,
-    Draw = 3,
-    Win = 6
 }

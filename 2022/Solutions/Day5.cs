@@ -9,7 +9,7 @@ public class Day5 : ISolver
 
         var stacks9000 = ParseStacks(stackLines);
         var stacks9001 = ParseStacks(stackLines);
-        var commands = ParseCommands(commandLines);
+        var commands = commandLines.Select(l => ParseCommand(l)).ToList();
 
         yield return ExecuteCommands(stacks9000, commands, batched: false);
         yield return ExecuteCommands(stacks9001, commands, batched: true);   
@@ -31,10 +31,7 @@ public class Day5 : ISolver
         var source = stacks[command.SourceIndex];
         var target = stacks[command.TargetIndex];
         var boxes = Enumerable.Range(0, command.BoxCount).Select(_ => source.Pop());
-        var payload = batched.Match(
-            t => boxes.Reverse(),
-            f => boxes
-        );
+        var payload = batched.Match(t => boxes.Reverse(), f => boxes);
 
         foreach (var box in payload)
         {
@@ -46,8 +43,8 @@ public class Day5 : ISolver
     {
         var stackLines = lines.Reverse();
 
-        var counts = stackLines.First().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        var count = Int32.Parse(counts.Last());
+        var numbers = stackLines.First().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var count = numbers.Count();
         var stacks = Enumerable.Range(0, count).Select(_ => new Stack<char>()).ToList();
 
         foreach (var line in stackLines.Skip(1))
@@ -65,17 +62,14 @@ public class Day5 : ISolver
         return stacks;
     }
 
-    private IEnumerable<Command> ParseCommands(IEnumerable<string> commandLines)
+    private Command ParseCommand(string line)
     {
-        foreach (var line in commandLines)
-        {
-            var parts = line.Split(' ');
-            yield return new Command(
-                BoxCount: Int32.Parse(parts[1]),
-                SourceIndex: Int32.Parse(parts[3]) - 1,
-                TargetIndex: Int32.Parse(parts[5]) - 1
-            );
-        }
+        var parts = line.Split(' ');
+        return new Command(
+            BoxCount: Int32.Parse(parts[1]),
+            SourceIndex: Int32.Parse(parts[3]) - 1,
+            TargetIndex: Int32.Parse(parts[5]) - 1
+        );
     }
 }
 
