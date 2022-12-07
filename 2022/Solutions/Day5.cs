@@ -4,7 +4,7 @@ public class Day5 : ISolver
 {
     public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
-        var stackLines = lines.TakeWhile(l => !String.IsNullOrWhiteSpace(l)).ToList();
+        var stackLines = lines.TakeWhile(l => !l.IsBlank()).ToList();
         var commandLines = lines.Skip(stackLines.Count + 1);
 
         var stacks9000 = ParseStacks(stackLines);
@@ -66,11 +66,11 @@ public class Day5 : ISolver
     {
         var parts = line.Split(' ');
         return new Command(
-            BoxCount: Int32.Parse(parts[1]),
-            SourceIndex: Int32.Parse(parts[3]) - 1,
-            TargetIndex: Int32.Parse(parts[5]) - 1
+            BoxCount: parts[1].ToInt(),
+            SourceIndex: parts[3].ToInt() - 1,
+            TargetIndex: parts[5].ToInt() - 1
         );
     }
-}
 
-public record Command(int BoxCount, int SourceIndex, int TargetIndex);
+    public record Command(int BoxCount, int SourceIndex, int TargetIndex);
+}

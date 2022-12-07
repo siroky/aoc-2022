@@ -4,7 +4,7 @@ public class Day1 : ISolver
 {
     public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
-        var partitions = ParseInput(lines);
+        var partitions = ParsePartitions(lines);
         var sums = partitions.Select(p => p.Sum());
         var leaderboard = sums.OrderByDescending(s => s).ToList();
 
@@ -12,28 +12,14 @@ public class Day1 : ISolver
         yield return leaderboard.Take(3).Sum().ToString();
     }
 
-    private IEnumerable<IEnumerable<int>> ParseInput(IEnumerable<string> lines)
+    private IEnumerable<IEnumerable<int>> ParsePartitions(IEnumerable<string> lines)
     {
-        var partition = new List<int>();
-        foreach (var line in lines)
-        {
-            if (String.IsNullOrEmpty(line))
-            {
-                if (partition.Any())
-                {
-                    yield return partition;
-                    partition = new List<int>();
-                }
-            }
-            else
-            {
-                partition.Add(Int32.Parse(line));
-            }
-        }
+        return lines.Partition(l => l.IsBlank()).Select(p => ParsePartition(p));
+    }
 
-        if (partition.Any())
-        {
-            yield return partition;
-        }
+    private IEnumerable<int> ParsePartition(IEnumerable<string> lines)
+    {
+        var cleanLines = lines.Where(l => !l.IsBlank());
+        return cleanLines.Select(l => l.ToInt());
     }
 }

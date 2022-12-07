@@ -26,8 +26,8 @@ public class Day4 : ISolver
     private Interval<int> ParseInterval(string i)
     {
         var bounds = i.Split('-');
-        var lowerBound = Int32.Parse(bounds[0]);
-        var upperBound = Int32.Parse(bounds[1]);
+        var lowerBound = bounds[0].ToInt();
+        var upperBound = bounds[1].ToInt();
         return Intervals.ClosedInterval(lowerBound, upperBound);
     }
 }

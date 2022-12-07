@@ -45,32 +45,31 @@ public class Day2 : ISolver
             'Z', _ => Result.Win
         );
     }
-}
 
-public enum Move
-{
-    Rock = 1,
-    Paper = 2,
-    Scissors = 3
-}
-
-public enum Result
-{
-    Loss = 0,
-    Draw = 3,
-    Win = 6
-}
-
-public static class Game
-{
-    public static IEnumerable<(Move, Move, Result)> States { get; }
-    public static DataCube2<Move, Move, Result> Results { get; }
-    public static DataCube2<Move, Result, Move> Players { get; }
-
-    static Game()
+    public enum Move
     {
-        States = new[]
+        Rock = 1,
+        Paper = 2,
+        Scissors = 3
+    }
+
+    public enum Result
+    {
+        Loss = 0,
+        Draw = 3,
+        Win = 6
+    }
+
+    public static class Game
+    {
+        public static IEnumerable<(Move, Move, Result)> States { get; }
+        public static DataCube2<Move, Move, Result> Results { get; }
+        public static DataCube2<Move, Result, Move> Players { get; }
+
+        static Game()
         {
+            States = new[]
+            {
             (Move.Rock, Move.Rock, Result.Draw),
             (Move.Rock, Move.Paper, Result.Loss),
             (Move.Rock, Move.Scissors, Result.Win),
@@ -84,7 +83,8 @@ public static class Game
             (Move.Scissors, Move.Scissors, Result.Draw)
         };
 
-        Results = States.ToDataCube(s => s.Item1, s => s.Item2, s => s.Item3);
-        Players = States.ToDataCube(s => s.Item2, s => s.Item3, s => s.Item1);
+            Results = States.ToDataCube(s => s.Item1, s => s.Item2, s => s.Item3);
+            Players = States.ToDataCube(s => s.Item2, s => s.Item3, s => s.Item1);
+        }
     }
 }
