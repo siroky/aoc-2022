@@ -19,8 +19,8 @@ public class Day8 : ISolver
         foreach (var position in trees.Keys)
         {
             var cuts = forest.Indexes.SelectMany(p => new[] { new Vector(p, position.Y), new Vector(position.X, p) });
-            var sortedCuts = cuts.Where(p => p != position).OrderBy(p => ManhattanDistance(p, position));
-            var lines = sortedCuts.GroupBy(p => Direction(p, position));
+            var sortedCuts = cuts.OrderBy(p => ManhattanDistance(p, position));
+            var lines = sortedCuts.Where(p => p != position).GroupBy(p => Direction(p, position));
             var results = lines.Select(d => evaluateLine(trees[position], d.Select(p => trees[p])));
 
             result[position] = results.Aggregate(aggregateResults);
