@@ -31,4 +31,9 @@ public static class Extensions
     {
         return Int32.Parse(s);
     }
+
+    public static int ToInt(this char c)
+    {
+        return c.ToString().ToInt();
+    }
 }

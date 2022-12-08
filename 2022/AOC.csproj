@@ -9,13 +9,18 @@
 
   <ItemGroup>
     <PackageReference Include="FuncSharp" Version="4.3.0" />
+    <PackageReference Include="morelinq" Version="3.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="FuncSharp" />
+    <Using Include="MoreLinq" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Inputs\8.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Inputs\7.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

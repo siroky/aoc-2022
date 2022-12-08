@@ -27,14 +27,11 @@ public class Day7 : ISolver
         foreach (var command in commands)
         {
             command.Match(
-                cd =>
-                {
-                    current = cd.Name.Match(
-                        "/", _ => root,
-                        "..", _ => current.Parent,
-                        _ => current.Directories.First(d => d.Name.Equals(cd.Name))
-                    );
-                },
+                cd => current = cd.Name.Match(
+                    "/", _ => root,
+                    "..", _ => current.Parent,
+                    _ => current.Directories.First(d => d.Name.Equals(cd.Name))
+                ),
                 ls =>
                 {
                     current.Files.AddRange(ls.Files.Select(f => new FileSystem.File(f.Name, f.Size)));
