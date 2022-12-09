@@ -22,6 +22,11 @@ public static class Extensions
         }
     }
 
+    public static IEnumerable<T> Generate<T>(this int count, Func<int, T> item)
+    {
+        return Enumerable.Range(0, count).Select(i => item(i));
+    }
+
     public static bool IsBlank(this string s)
     {
         return String.IsNullOrWhiteSpace(s);

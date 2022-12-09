@@ -30,7 +30,7 @@ public class Day5 : ISolver
     {
         var source = stacks[command.SourceIndex];
         var target = stacks[command.TargetIndex];
-        var boxes = Enumerable.Range(0, command.BoxCount).Select(_ => source.Pop());
+        var boxes = command.BoxCount.Generate(_ => source.Pop());
         var payload = batched.Match(t => boxes.Reverse(), f => boxes);
 
         foreach (var box in payload)
@@ -45,7 +45,7 @@ public class Day5 : ISolver
 
         var numbers = stackLines.First().Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var count = numbers.Count();
-        var stacks = Enumerable.Range(0, count).Select(_ => new Stack<char>()).ToList();
+        var stacks = count.Generate(_ => new Stack<char>()).ToList();
 
         foreach (var line in stackLines.Skip(1))
         {

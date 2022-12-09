@@ -19,7 +19,7 @@ public class Day8 : ISolver
         foreach (var position in trees.Keys)
         {
             var cuts = forest.Indexes.SelectMany(p => new[] { new Vector(p, position.Y), new Vector(position.X, p) });
-            var sortedCuts = cuts.OrderBy(p => ManhattanDistance(p, position));
+            var sortedCuts = cuts.OrderBy(p => p.ManhattanDistance(position));
             var lines = sortedCuts.Where(p => p != position).GroupBy(p => Direction(p, position));
             var results = lines.Select(d => evaluateLine(trees[position], d.Select(p => trees[p])));
 
@@ -27,11 +27,6 @@ public class Day8 : ISolver
         }
 
         return result;
-    }
-
-    private int ManhattanDistance(Vector a, Vector b)
-    {
-        return Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
     }
 
     private Vector Direction(Vector from, Vector to)
@@ -57,6 +52,5 @@ public class Day8 : ISolver
         return new Forest(size, indexes, trees);
     }
 
-    public record Vector(int X, int Y);
     public record Forest(int Size, IEnumerable<int> Indexes, Dictionary<Vector, int> Trees);
 }
