@@ -19,13 +19,16 @@ public class Day10 : ISolver
     private IEnumerable<IEnumerable<int>> ExecuteInstructions(IEnumerable<Instruction> instructions)
     {
         var register = 1;
-        yield return register.ToEnumerable();
-
         foreach (var instruction in instructions)
         {
             yield return instruction.Match(
                 noop => register.ToEnumerable(),
-                add => new[] { register, register += add.Value }
+                add =>
+                {
+                    var registers = Enumerable.Repeat(register, 2);
+                    register += add.Value;
+                    return registers;
+                }
             );
         }
     }
