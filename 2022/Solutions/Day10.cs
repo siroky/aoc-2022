@@ -8,9 +8,9 @@ public class Day10 : ISolver
         var registers = ExecuteInstructions(instructions).Flatten().ToList();
 
         var interestingCycles = Enumerable.Range(0, 6).Select(i => 20 + i * 40);
-        var interestingStrengths = interestingCycles.Select(c => EvaluateStrength(registers, c));
+        var interestingStrengths = interestingCycles.Select(c => c * registers.ElementAt(c - 1));
 
-        var screen = Render(registers);
+        var screen = Render(registers, 40);
 
         yield return interestingStrengths.Sum().ToString();
         yield return "\n" + String.Join("\n", screen);
@@ -33,20 +33,15 @@ public class Day10 : ISolver
         }
     }
 
-    private int EvaluateStrength(IEnumerable<int> registers, int cycle)
+    private IEnumerable<string> Render(IEnumerable<int> registers, int size)
     {
-        return cycle * registers.ElementAt(cycle - 1);
-    }
-
-    private IEnumerable<string> Render(IEnumerable<int> registers)
-    {
-        foreach (var batch in registers.Chunk(40))
+        foreach (var batch in registers.Chunk(size))
         {
             var pixels = batch.Select((register, index) => (Math.Abs(register - index) <= 1).Match(
                 t => "█",
                 f => " "
             ));
-            
+
             yield return String.Concat(pixels);
         }
     }
