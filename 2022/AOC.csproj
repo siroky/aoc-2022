@@ -14,10 +14,12 @@
 
   <ItemGroup>
     <Using Include="FuncSharp" />
-    <Using Include="MoreLinq" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Inputs\10.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Inputs\9.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

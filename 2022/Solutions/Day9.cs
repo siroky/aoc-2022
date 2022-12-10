@@ -37,7 +37,7 @@ public class Day9 : ISolver
     {
         var knots = rope.Knots;
         var newHead = knots.First().Add(direction);
-        var newKnots = new[] { newHead }.ToList();
+        var newKnots = newHead.ToEnumerable().ToList();
 
         foreach (var knot in knots.Skip(1))
         {
@@ -58,15 +58,15 @@ public class Day9 : ISolver
     {
         foreach (var line in lines)
         {
-            var parts = line.Split(' ');
+            var words = line.Words();
             yield return new Step(
-                Direction: parts[0].Match(
+                Direction: words.First().Match(
                     "U", _ => new Vector(0, 1),
                     "D", _ => new Vector(0, -1),
                     "L", _ => new Vector(-1, 0),
                     "R", _ => new Vector(1, 0)
                 ),
-                Count: parts[1].ToInt()
+                Count: words.Second().ToInt()
             );
         }
     }

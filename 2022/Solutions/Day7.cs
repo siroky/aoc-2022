@@ -60,7 +60,7 @@ public class Day7 : ISolver
 
             var childData = childResults.SelectMany(r => r.Data);
             var directoryData = size.ToOption().Where(s => dataPredicate(s)).ToEnumerable();
-            var data = childData.Concat(directoryData).Aggregate(Enumerable.Empty<int>(), (a, b) => a.Concat(new[] { b }));
+            var data = childData.Concat(directoryData).Aggregate(Enumerable.Empty<int>(), (a, b) => a.Concat(b));
 
             return new MeasurementResult(size, data);
         }
@@ -88,10 +88,10 @@ public class Day7 : ISolver
 
         private static Command ParseCommand(IEnumerable<string> lines)
         {
-            var parts = lines.First().Split(' ');
+            var words = lines.First().Words();
 
-            return parts[1].Match(
-                "cd", _ => new Command(new ChangeDirectory(parts[2])),
+            return words.Second().Match(
+                "cd", _ => new Command(new ChangeDirectory(words.Third())),
                 "ls", _ => new Command(ParseListDirectory(lines.Skip(1)))
             );
         }
@@ -103,12 +103,12 @@ public class Day7 : ISolver
             
             foreach (var line in contents)
             {
-                var parts = line.Split(' ');
-                var name = parts[1];
+                var words = line.Words();
+                var name = words.Second();
 
-                parts[0].Match(
+                words.First().Match(
                     "dir", _ => directories.Add(new Directory(name)),
-                    size => files.Add(new File(name, Int32.Parse(size)))
+                    size => files.Add(new File(name, size.ToInt()))
                 );
             }
 

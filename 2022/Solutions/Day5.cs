@@ -64,11 +64,11 @@ public class Day5 : ISolver
 
     private Command ParseCommand(string line)
     {
-        var parts = line.Split(' ');
+        var words = line.Words();
         return new Command(
-            BoxCount: parts[1].ToInt(),
-            SourceIndex: parts[3].ToInt() - 1,
-            TargetIndex: parts[5].ToInt() - 1
+            BoxCount: words.Second().ToInt(),
+            SourceIndex: words.ElementAt(3).ToInt() - 1,
+            TargetIndex: words.ElementAt(5).ToInt() - 1
         );
     }
 

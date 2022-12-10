@@ -1,4 +1,6 @@
-﻿namespace AOC.Solutions;
+﻿using MoreLinq;
+
+namespace AOC.Solutions;
 
 public class Day8 : ISolver
 {
