@@ -67,8 +67,8 @@ public class Day5 : ISolver
         var words = line.Words();
         return new Command(
             BoxCount: words.Second().ToInt(),
-            SourceIndex: words.ElementAt(3).ToInt() - 1,
-            TargetIndex: words.ElementAt(5).ToInt() - 1
+            SourceIndex: words.Fourth().ToInt() - 1,
+            TargetIndex: words.Sixth().ToInt() - 1
         );
     }
 

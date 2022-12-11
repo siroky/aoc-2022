@@ -32,6 +32,21 @@ public static class Extensions
         return items.ElementAt(2);
     }
 
+    public static T Fourth<T>(this IEnumerable<T> items)
+    {
+        return items.ElementAt(3);
+    }
+
+    public static T Fifth<T>(this IEnumerable<T> items)
+    {
+        return items.ElementAt(4);
+    }
+
+    public static T Sixth<T>(this IEnumerable<T> items)
+    {
+        return items.ElementAt(5);
+    }
+
     public static IEnumerable<T> Concat<T>(this IEnumerable<T> items, T item)
     {
         return items.Concat(item.ToEnumerable());
@@ -54,7 +69,22 @@ public static class Extensions
 
     public static IEnumerable<string> Words(this string s)
     {
-        return s.Split(' ');
+        return s.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    }
+
+    public static int Product(this IEnumerable<int> items)
+    {
+        return items.Aggregate((a, b) => a * b);
+    }
+
+    public static long Product(this IEnumerable<long> items)
+    {
+        return items.Aggregate((a, b) => a * b);
+    }
+
+    public static IEnumerable<IEnumerable<string>> Paragraphs(this IEnumerable<string> lines)
+    {
+        return lines.Partition(l => l.IsBlank()).Select(p => p.Where(l => !l.IsBlank()));
     }
 
     public static bool IsBlank(this string s)
@@ -67,8 +97,29 @@ public static class Extensions
         return Int32.Parse(s);
     }
 
+    public static IOption<int> ToIntOption(this string s)
+    {
+        return Int32.TryParse(s, out var i).Match(
+            t => i.ToOption(),
+            f => Option.Empty<int>()
+        );
+    }
+
     public static int ToInt(this char c)
     {
         return c.ToString().ToInt();
+    }
+
+    public static long ToLong(this string s)
+    {
+        return Int64.Parse(s);
+    }
+
+    public static IOption<long> ToLongOption(this string s)
+    {
+        return Int64.TryParse(s, out var i).Match(
+            t => i.ToOption(),
+            f => Option.Empty<long>()
+        );
     }
 }

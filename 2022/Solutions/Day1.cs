@@ -14,12 +14,6 @@ public class Day1 : ISolver
 
     private IEnumerable<IEnumerable<int>> ParsePartitions(IEnumerable<string> lines)
     {
-        return lines.Partition(l => l.IsBlank()).Select(p => ParsePartition(p));
-    }
-
-    private IEnumerable<int> ParsePartition(IEnumerable<string> lines)
-    {
-        var cleanLines = lines.Where(l => !l.IsBlank());
-        return cleanLines.Select(l => l.ToInt());
+        return lines.Paragraphs().Select(p => p.Select(l => l.ToInt()));
     }
 }
