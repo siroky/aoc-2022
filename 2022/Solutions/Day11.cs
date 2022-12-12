@@ -9,7 +9,7 @@ public class Day11 : ISolver
         var monkeys = lines.Paragraphs().Select(p => ParseMonkey(p)).ToList();
         var divisorProduct = monkeys.Select(m => m.Behavior.Divisor).Product();
 
-        var results1 = ExecuteRounds(20, monkeys, adjustWorry: w => (int)Math.Floor((double)w / 3));
+        var results1 = ExecuteRounds(20, monkeys, adjustWorry: w => w / 3);
         var results2 = ExecuteRounds(10_000, monkeys, adjustWorry: w => w % divisorProduct);
 
         yield return MonkeyBusiness(results1);
@@ -50,7 +50,6 @@ public class Day11 : ISolver
 
             var worries = items.Select(i => adjustWorry(monkey.Behavior.Worry(i)));
             var throws = worries.ToLookup(i => monkey.Behavior.Throw(i));
-
             foreach (var target in throws)
             {
                 catches.SetOrElseUpdate(target.Key, target, (a, b) => a.Concat(b));
@@ -93,8 +92,7 @@ public class Day11 : ISolver
                     f => failure
                 )
             ),
-            Items: items,
-            Inspections: 0
+            Items: items
         );
     }
 

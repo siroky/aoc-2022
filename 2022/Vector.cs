@@ -4,6 +4,12 @@ public record Vector(int X, int Y)
 {
     public static readonly Vector Zero = new Vector(0, 0);
 
+    public static readonly IEnumerable<Vector> Basis = new[]
+    {
+        new Vector(1, 0),
+        new Vector(0, 1)
+    };
+
     public Vector Add(Vector b)
     {
         return new Vector(X + b.X, Y + b.Y);
