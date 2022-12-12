@@ -26,9 +26,8 @@ public class Day12 : ISolver
                 return distance.ToOption();
             }
 
-            var newNext = next.SelectMany(n => graph.Edges[n]);
             visited.UnionWith(next);
-            next = newNext.Except(visited).ToHashSet();
+            next = next.SelectMany(n => graph.Edges[n]).Except(visited).ToHashSet();
             distance += 1;
         }
 
