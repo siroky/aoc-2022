@@ -46,21 +46,21 @@ public class Day2 : ISolver
         );
     }
 
-    public enum Move
+    private enum Move
     {
         Rock = 1,
         Paper = 2,
         Scissors = 3
     }
 
-    public enum Result
+    private enum Result
     {
         Loss = 0,
         Draw = 3,
         Win = 6
     }
 
-    public static class Game
+    private static class Game
     {
         public static IEnumerable<(Move, Move, Result)> States { get; }
         public static DataCube2<Move, Move, Result> Results { get; }

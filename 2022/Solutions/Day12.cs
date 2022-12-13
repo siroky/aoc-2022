@@ -62,6 +62,6 @@ public class Day12 : ISolver
         )));
     }
 
-    public record Node(char Character, Vector Position, int Height);
-    public record Graph(IEnumerable<Node> Nodes, ILookup<Node, Node> Edges);
+    private record Node(char Character, Vector Position, int Height);
+    private record Graph(IEnumerable<Node> Nodes, ILookup<Node, Node> Edges);
 }

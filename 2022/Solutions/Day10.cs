@@ -58,9 +58,9 @@ public class Day10 : ISolver
         }
     }
 
-    public record Noop();
-    public record Add(int Value);
-    public class Instruction : Coproduct2<Noop, Add>
+    private record Noop();
+    private record Add(int Value);
+    private class Instruction : Coproduct2<Noop, Add>
     {
         public Instruction(Noop n) : base(n) { }
         public Instruction(Add a) : base(a) { }

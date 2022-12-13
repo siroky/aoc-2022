@@ -52,6 +52,11 @@ public static class Extensions
         return items.Concat(item.ToEnumerable());
     }
 
+    public static int Count<T>(this IEnumerable<T> items, T item)
+    {
+        return items.Count(i => EqualityComparer<T>.Default.Equals(i, item));
+    }
+
     public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> items)
     {
         return items.SelectMany(i => i);

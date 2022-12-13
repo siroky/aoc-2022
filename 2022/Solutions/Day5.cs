@@ -72,5 +72,5 @@ public class Day5 : ISolver
         );
     }
 
-    public record Command(int BoxCount, int SourceIndex, int TargetIndex);
+    private record Command(int BoxCount, int SourceIndex, int TargetIndex);
 }

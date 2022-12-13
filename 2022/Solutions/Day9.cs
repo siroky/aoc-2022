@@ -71,6 +71,6 @@ public class Day9 : ISolver
         }
     }
 
-    public record Rope(List<Vector> Knots);
-    public record Step(Vector Direction, int Count);
+    private record Rope(List<Vector> Knots);
+    private record Step(Vector Direction, int Count);
 }

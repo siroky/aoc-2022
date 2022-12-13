@@ -54,5 +54,5 @@ public class Day8 : ISolver
         return new Forest(size, indexes, trees);
     }
 
-    public record Forest(int Size, IEnumerable<int> Indexes, Dictionary<Vector, int> Trees);
+    private record Forest(int Size, IEnumerable<int> Indexes, Dictionary<Vector, int> Trees);
 }

@@ -96,6 +96,6 @@ public class Day11 : ISolver
         );
     }
 
-    public record Monkey(MonkeyBehavior Behavior, IEnumerable<long> Items, long Inspections = 0);
-    public record MonkeyBehavior(Func<long, long> Worry, long Divisor, Func<long, int> Throw);
+    private record Monkey(MonkeyBehavior Behavior, IEnumerable<long> Items, long Inspections = 0);
+    private record MonkeyBehavior(Func<long, long> Worry, long Divisor, Func<long, int> Throw);
 }

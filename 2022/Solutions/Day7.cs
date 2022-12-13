@@ -1,6 +1,4 @@
-﻿using static AOC.Solutions.Day7.FileSystem;
-
-namespace AOC.Solutions;
+﻿namespace AOC.Solutions;
 
 public class Day7 : ISolver
 {
@@ -8,12 +6,12 @@ public class Day7 : ISolver
     {
         var commands = Console.ParseCommands(lines);
         var root = Interpret(commands);
-        var smaller = Measure(root, size => size <= 100_000);
+        var smaller = FileSystem.Measure(root, size => size <= 100_000);
 
         var availableSpace = 70_000_000 - smaller.Size;
         var minimalSpace = 30_000_000;
         var requiredSpace = minimalSpace - availableSpace;
-        var candidates = Measure(root, size => size >= requiredSpace);
+        var candidates = FileSystem.Measure(root, size => size >= requiredSpace);
 
         yield return smaller.Data.Sum().ToString();
         yield return candidates.Data.Min().ToString();
@@ -43,7 +41,7 @@ public class Day7 : ISolver
         return root;
     }
 
-    public static class FileSystem
+    private static class FileSystem
     {
         public record File(string Name, int Size);
         public record Directory(string Name, Directory Parent, List<Directory> Directories, List<File> Files)
@@ -68,7 +66,7 @@ public class Day7 : ISolver
         public record MeasurementResult(int Size, IEnumerable<int> Data);
     }
 
-    public static class Console
+    private static class Console
     {
         public record File(string Name, int Size);
         public record Directory(string Name);
