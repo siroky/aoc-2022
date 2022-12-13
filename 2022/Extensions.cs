@@ -22,6 +22,11 @@ public static class Extensions
         }
     }
 
+    public static bool IsEmpty<T>(this IEnumerable<T> items)
+    {
+        return !items.Any();
+    }
+
     public static T Second<T>(this IEnumerable<T> items)
     {
         return items.ElementAt(1);
