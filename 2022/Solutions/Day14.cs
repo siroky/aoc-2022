@@ -37,26 +37,22 @@ public class Day14 : ISolver
         var position = origin;
         while (true)
         {
-            var newPosition = SimulateStep(grid, position);
-            if (newPosition == position || position.Y == maxY)
+            var options = GetStepOptions(position);
+            var newPosition = options.FirstOption(p => !grid.Contains(p)).GetOrElse(position);
+            if (newPosition == position || newPosition.Y == maxY)
             {
-                return position;
+                return newPosition;
             }
 
             position = newPosition;
         }
     }
 
-    private Vector SimulateStep(DataCube1<Vector, CellType> grid, Vector origin)
+    private IEnumerable<Vector> GetStepOptions(Vector position)
     {
-        var options = new[]
-        {
-            origin.Add(new Vector(0, 1)),
-            origin.Add(new Vector(-1, 1)),
-            origin.Add(new Vector(1, 1))
-        };
-
-        return options.FirstOption(p => !grid.Contains(p)).GetOrElse(origin);
+        yield return position.Add(new Vector(0, 1));
+        yield return position.Add(new Vector(-1, 1));
+        yield return position.Add(new Vector(1, 1));
     }
 
     private DataCube1<Vector, CellType> CreateGrid(IEnumerable<IEnumerable<Vector>> rocks)
