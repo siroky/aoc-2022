@@ -50,7 +50,7 @@ public class Day14 : ISolver
 
     private IEnumerable<Vector> GetStepOptions(Vector position)
     {
-        yield return position.Add(new Vector(0, 1));
+        yield return position.AddY(1);
         yield return position.Add(new Vector(-1, 1));
         yield return position.Add(new Vector(1, 1));
     }

@@ -27,6 +27,16 @@ public static class Extensions
         return !items.Any();
     }
 
+    public static bool IsSingle<T>(this IEnumerable<T> items)
+    {
+        return items.Take(2).Count() == 1;
+    }
+
+    public static bool IsMultiple<T>(this IEnumerable<T> items)
+    {
+        return items.Take(2).Count() == 2;
+    }
+
     public static T Second<T>(this IEnumerable<T> items)
     {
         return items.ElementAt(1);

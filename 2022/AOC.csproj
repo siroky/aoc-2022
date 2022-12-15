@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FuncSharp" Version="4.3.0" />
+    <PackageReference Include="FuncSharp" Version="4.3.1" />
     <PackageReference Include="morelinq" Version="3.3.2" />
   </ItemGroup>
 
@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Inputs\15.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Inputs\14.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

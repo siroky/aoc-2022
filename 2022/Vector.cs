@@ -15,6 +15,16 @@ public record Vector(int X, int Y)
         return new Vector(X + b.X, Y + b.Y);
     }
 
+    public Vector AddX(int value)
+    {
+        return new Vector(X + value, Y);
+    }
+
+    public Vector AddY(int value)
+    {
+        return new Vector(X, Y + value);
+    }
+
     public Vector Subtract(Vector b)
     {
         return Add(b.Invert());
