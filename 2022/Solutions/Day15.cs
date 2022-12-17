@@ -4,7 +4,7 @@ namespace AOC.Solutions;
 
 public class Day15 : ISolver
 {
-    private static readonly ComparableTotalOrder<int> Intervals = new ComparableTotalOrder<int>();
+    private static readonly ComparableTotalOrder<long> Intervals = new ComparableTotalOrder<long>();
 
     public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
@@ -35,7 +35,7 @@ public class Day15 : ISolver
         return Option.Empty<Vector>();
     }
 
-    private int DeadZoneSize(IEnumerable<Sensor> sensors, int y)
+    private long DeadZoneSize(IEnumerable<Sensor> sensors, int y)
     {
         var deadZone = DeadZone(sensors, y);
         var deadZoneSize = deadZone.Intervals.Sum(i => i.UpperBoundValue.Get() - i.LowerBoundValue.Get() + 1);
@@ -46,12 +46,12 @@ public class Day15 : ISolver
         return deadZoneSize - beaconCount;
     }
 
-    private IntervalSet<int> DeadZone(IEnumerable<Sensor> sensors, int y)
+    private IntervalSet<long> DeadZone(IEnumerable<Sensor> sensors, int y)
     {
         return Intervals.Union(sensors.Select(s => DeadZone(s, y)));
     }
 
-    private Interval<int> DeadZone(Sensor sensor, int y)
+    private Interval<long> DeadZone(Sensor sensor, int y)
     {
         var lineDistance = Math.Abs(sensor.Position.Y - y);
         var beaconDistance = sensor.Position.ManhattanDistance(sensor.Beacon);

@@ -1,6 +1,6 @@
 ﻿namespace AOC;
 
-public record Vector(int X, int Y)
+public record struct Vector(long X, long Y)
 {
     public static readonly Vector Zero = new Vector(0, 0);
 
@@ -15,12 +15,12 @@ public record Vector(int X, int Y)
         return new Vector(X + b.X, Y + b.Y);
     }
 
-    public Vector AddX(int value)
+    public Vector AddX(long value)
     {
         return new Vector(X + value, Y);
     }
 
-    public Vector AddY(int value)
+    public Vector AddY(long value)
     {
         return new Vector(X, Y + value);
     }
@@ -40,7 +40,7 @@ public record Vector(int X, int Y)
         return new Vector(Math.Sign(X), Math.Sign(Y));
     }
 
-    public int ManhattanDistance(Vector b)
+    public long ManhattanDistance(Vector b)
     {
         return Math.Abs(X - b.X) + Math.Abs(Y - b.Y);
     }

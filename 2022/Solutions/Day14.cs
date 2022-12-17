@@ -32,7 +32,7 @@ public class Day14 : ISolver
         return grid;
     }
 
-    private Vector SimulateGrain(DataCube1<Vector, CellType> grid, Vector origin, int maxY)
+    private Vector SimulateGrain(DataCube1<Vector, CellType> grid, Vector origin, long maxY)
     {
         var position = origin;
         while (true)
