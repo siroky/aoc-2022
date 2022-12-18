@@ -107,6 +107,14 @@ public static class Extensions
         return lines.Partition(l => l.IsBlank()).Select(p => p.Where(l => !l.IsBlank()));
     }
 
+    public static void Add<K, V>(this Dictionary<K, V> dictionary, IEnumerable<K> keys, V value)
+    {
+        foreach (var key in keys)
+        {
+            dictionary.Add(key, value);
+        }
+    }
+
     public static bool IsBlank(this string s)
     {
         return String.IsNullOrWhiteSpace(s);

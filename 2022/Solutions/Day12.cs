@@ -40,7 +40,7 @@ public class Day12 : ISolver
         var grid = nodes.ToDataCube(n => n.Position, n => n);
         var edges = nodes.SelectMany(node =>
         {
-            var directions = Vector.Basis.Concat(Vector.Basis.Select(v => v.Invert()));
+            var directions = Vector.Basis2.Concat(Vector.Basis2.Select(v => v.Invert()));
             var neighbors = directions.Select(d => grid.Get(node.Position.Add(d))).Flatten();
             var reachable = neighbors.Where(n => n.Height - node.Height <= 1);
             return reachable.Select(n => (node, n));
