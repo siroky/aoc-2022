@@ -4,7 +4,7 @@ public class Day18 : ISolver
 {
     public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
-        var cubes = lines.Select(l => ParseCube(l)).ToList();
+        var cubes = lines.Select(l => Vector.Parse(l.Split(","))).ToList();
         var totalSurface = Surface(cubes, external: false);
         var externalSurface = Surface(cubes, external: true);
 
@@ -23,32 +23,12 @@ public class Day18 : ISolver
         {
             grid.Add(next, true);
 
-            var adjacent = next.SelectMany(c => Adjacent(c)).Distinct();
+            var adjacent = next.SelectMany(c => c.AdjacentXYZ()).Distinct();
             var boundedAdjacent = adjacent.Where(c => c.PreceedsOrEquals(max) && min.PreceedsOrEquals(c));
             next = boundedAdjacent.Where(c => !grid.ContainsKey(c)).ToList();
         }
 
-        var adjacentCubes = cubes.SelectMany(c => Adjacent(c));
+        var adjacentCubes = cubes.SelectMany(c => c.AdjacentXYZ());
         return adjacentCubes.Count(c => grid.Get(c).GetOrElse(!external));
-    }
-
-    private IEnumerable<Vector> Adjacent(Vector cube)
-    {
-        yield return cube.AddX(1);
-        yield return cube.AddX(-1);
-        yield return cube.AddY(1);
-        yield return cube.AddY(-1);
-        yield return cube.AddZ(1);
-        yield return cube.AddZ(-1);
-    }
-
-    private Vector ParseCube(string line)
-    {
-        var parts = line.Split(',');
-        return new Vector(
-            X: parts.First().ToInt(),
-            Y: parts.Second().ToInt(),
-            Z: parts.Third().ToInt()
-        );
     }
 }

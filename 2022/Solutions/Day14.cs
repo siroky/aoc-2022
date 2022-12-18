@@ -83,12 +83,7 @@ public class Day14 : ISolver
 
     private IEnumerable<Vector> ParseRocks(string line)
     {
-        var points = line.Split(" -> ");
-        foreach (var point in points)
-        {
-            var parts = point.Split(",");
-            yield return new Vector(parts.First().ToInt(), parts.Second().ToInt());
-        }
+        return line.Split(" -> ").Select(p => Vector.Parse(p.Split(",")));
     }
 
     private enum CellType

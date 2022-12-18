@@ -67,10 +67,10 @@ public class Day15 : ISolver
     {
         var words = line.Words();
         var indexes = new[] { 2, 3, 8, 9 };
-        var coords = indexes.Select(i => Regex.Replace(words.ElementAt(i), "[,:xy=]+", "").ToInt());
+        var coords = indexes.Select(i => Regex.Replace(words.ElementAt(i), "[,:xy=]+", ""));
         return new Sensor(
-            Position: new Vector(coords.First(), coords.Second()),
-            Beacon: new Vector(coords.Third(), coords.Fourth())
+            Position: Vector.Parse(coords.Take(2)),
+            Beacon: Vector.Parse(coords.Skip(2).Take(2))
         );
     }
 
