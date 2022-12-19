@@ -34,7 +34,7 @@ public record struct Vector(long X, long Y, long Z = 0)
         return Math.Abs(X - b.X) + Math.Abs(Y - b.Y) + Math.Abs(Z - b.Z);
     }
 
-    public bool PreceedsOrEquals(Vector b)
+    public bool LessOrEquals(Vector b)
     {
         return X <= b.X && Y <= b.Y && Z <= b.Z;
     }

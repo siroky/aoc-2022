@@ -24,7 +24,7 @@ public class Day18 : ISolver
             grid.Add(next, true);
 
             var adjacent = next.SelectMany(c => c.AdjacentXYZ()).Distinct();
-            var boundedAdjacent = adjacent.Where(c => c.PreceedsOrEquals(max) && min.PreceedsOrEquals(c));
+            var boundedAdjacent = adjacent.Where(c => c.LessOrEquals(max) && min.LessOrEquals(c));
             next = boundedAdjacent.Where(c => !grid.ContainsKey(c)).ToList();
         }
 
