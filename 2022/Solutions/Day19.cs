@@ -78,9 +78,9 @@ public class Day19 : ISolver
 
         // Calculate tenative amount of produced geodes assuming infinite ore and parallel factory.
         // If the number of geodes produced in such conditions is smaller than current maximum, this state doesn't have potential. 
-        var clay = state.Minerals.Clay + TentativeMineral(Math.Max(0, time - 4), state.Robots.Clay, Int32.MaxValue, blueprint.Robots[Mineral.Clay].Ore);
-        var obsidian = state.Minerals.Obsidian + TentativeMineral(Math.Max(0, time - 2), state.Robots.Obsidian, clay, blueprint.Robots[Mineral.Obsidian].Clay);
-        var geodes = state.Minerals.Geode + TentativeMineral(time, state.Robots.Geode, obsidian, blueprint.Robots[Mineral.Geode].Obsidian);
+        var clay = state.Minerals.Clay + TentativeMineral(Math.Max(0, time - 4), state.Robots.Clay, Int32.MaxValue);
+        var obsidian = state.Minerals.Obsidian + TentativeMineral(Math.Max(0, time - 2), state.Robots.Obsidian, clay / blueprint.Robots[Mineral.Obsidian].Clay);
+        var geodes = state.Minerals.Geode + TentativeMineral(time, state.Robots.Geode, obsidian / blueprint.Robots[Mineral.Geode].Obsidian);
         if (geodes <= max)
         {
             return false;
@@ -89,9 +89,8 @@ public class Day19 : ISolver
         return true;
     }
 
-    private int TentativeMineral(int time, int guaranteedRobots, int dependentMineral, int cost)
+    private int TentativeMineral(int time, int guaranteedRobots, int tentativeRobots)
     {
-        var tentativeRobots = dependentMineral / cost;
         var min = Math.Min(tentativeRobots, time);
         var ramp = min * (min - 1) / 2;
         var rest = tentativeRobots * Math.Max(0, time - tentativeRobots);
