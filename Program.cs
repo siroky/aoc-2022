@@ -20,7 +20,7 @@ internal static class Program
 
     private static void Solve(int day, ISolver solver)
     {
-        var input = System.IO.File.ReadAllLines($"Inputs/{day}.txt");
+        var input = File.ReadAllLines($"Inputs/{day:00}.txt");
         var results = solver.Solve(input);
         var outputs = results.Select((r, i) => $"{day}.{i + 1} - {r}");
             

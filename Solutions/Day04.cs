@@ -1,6 +1,6 @@
 ﻿namespace AOC.Solutions;
 
-public class Day4 : ISolver
+public class Day04 : ISolver
 {
     private static readonly ComparableTotalOrder<int> Intervals = new ComparableTotalOrder<int>();
 

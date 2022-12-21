@@ -1,6 +1,6 @@
 ﻿namespace AOC.Solutions;
 
-public class Day3 : ISolver
+public class Day03 : ISolver
 {
     public IEnumerable<string> Solve(IEnumerable<string> lines)
     {
