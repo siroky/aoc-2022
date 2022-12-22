@@ -61,10 +61,10 @@ public class Day09 : ISolver
             var words = line.Words();
             yield return new Step(
                 Direction: words.First().Match(
-                    "U", _ => new Vector(0, 1),
-                    "D", _ => new Vector(0, -1),
-                    "L", _ => new Vector(-1, 0),
-                    "R", _ => new Vector(1, 0)
+                    "U", _ => Vector.Up,
+                    "D", _ => Vector.Down,
+                    "L", _ => Vector.Left,
+                    "R", _ => Vector.Right
                 ),
                 Count: words.Second().ToInt()
             );

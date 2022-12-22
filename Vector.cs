@@ -3,8 +3,11 @@
 public record struct Vector(long X, long Y, long Z = 0)
 {
     public static readonly Vector Zero = new Vector(0, 0, 0);
-
     public static readonly Vector Unit = new Vector(1, 1, 1);
+    public static readonly Vector Up = new Vector(0, -1);
+    public static readonly Vector Down = new Vector(0, 1);
+    public static readonly Vector Left = new Vector(-1, 0);
+    public static readonly Vector Right = new Vector(1, 0);
 
     public static Vector Max(IEnumerable<Vector> vectors)
     {
@@ -59,6 +62,20 @@ public record struct Vector(long X, long Y, long Z = 0)
         return new Vector(X, Y, Z + value);
     }
 
+    public Vector Multiply(long value)
+    {
+        return new Vector(X * value, Y * value);
+    }
+    public Vector Divide(long value)
+    {
+        return new Vector(X / value, Y / value);
+    }
+
+    public Vector Modulo(long value)
+    {
+        return new Vector(X % value, Y % value);
+    }
+
     public Vector Subtract(Vector b)
     {
         return Add(b.Invert());
@@ -76,14 +93,14 @@ public record struct Vector(long X, long Y, long Z = 0)
 
     public IEnumerable<Vector> AdjacentX()
     {
-        yield return AddX(1);
-        yield return AddX(-1);
+        yield return Add(Left);
+        yield return Add(Right);
     }
 
     public IEnumerable<Vector> AdjacentY()
     {
-        yield return AddY(1);
-        yield return AddY(-1);
+        yield return Add(Up);
+        yield return Add(Down);
     }
 
     public IEnumerable<Vector> AdjacentZ()
