@@ -114,6 +114,17 @@ public record struct Vector(long X, long Y, long Z = 0)
         return AdjacentX().Concat(AdjacentY());
     }
 
+    public IEnumerable<Vector> SurroundingXY()
+    {
+        return AdjacentX().Concat(AdjacentY()).Concat(new[]
+        {
+            Add(Up).Add(Right),
+            Add(Up).Add(Left),
+            Add(Down).Add(Right),
+            Add(Down).Add(Left)
+        });
+    }
+
     public IEnumerable<Vector> AdjacentXYZ()
     {
         return AdjacentXY().Concat(AdjacentZ());
