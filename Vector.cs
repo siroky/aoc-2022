@@ -42,9 +42,14 @@ public record struct Vector(long X, long Y, long Z = 0)
         return X <= b.X && Y <= b.Y && Z <= b.Z;
     }
 
-    public Vector Add(Vector b)
+    public Vector Invert()
     {
-        return new Vector(X + b.X, Y + b.Y, Z + b.Z);
+        return new Vector(-X, -Y, -Z);
+    }
+
+    public Vector Sign()
+    {
+        return new Vector(Math.Sign(X), Math.Sign(Y), Math.Sign(Z));
     }
 
     public Vector AddX(long value)
@@ -71,24 +76,19 @@ public record struct Vector(long X, long Y, long Z = 0)
         return new Vector(X / value, Y / value);
     }
 
-    public Vector Modulo(long value)
+    public Vector Remainder(long divisor)
     {
-        return new Vector(X % value, Y % value);
+        return new Vector(X % divisor, Y % divisor);
+    }
+
+    public Vector Add(Vector b)
+    {
+        return new Vector(X + b.X, Y + b.Y, Z + b.Z);
     }
 
     public Vector Subtract(Vector b)
     {
         return Add(b.Invert());
-    }
-
-    public Vector Invert()
-    {
-        return new Vector(-X, -Y, -Z);
-    }
-
-    public Vector Sign()
-    {
-        return new Vector(Math.Sign(X), Math.Sign(Y), Math.Sign(Z));
     }
 
     public IEnumerable<Vector> AdjacentX()
@@ -112,6 +112,11 @@ public record struct Vector(long X, long Y, long Z = 0)
     public IEnumerable<Vector> AdjacentXY()
     {
         return AdjacentX().Concat(AdjacentY());
+    }
+
+    public IEnumerable<Vector> WithAdjacentXY()
+    {
+        return AdjacentXY().Concat(this);
     }
 
     public IEnumerable<Vector> SurroundingXY()

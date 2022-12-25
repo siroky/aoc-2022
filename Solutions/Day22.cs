@@ -100,7 +100,7 @@ public class Day22 : ISolver
                 var side = position.Divide(map.SideSize);
                 var (nextSide, newDirection, invert) = folding.SideMapping[(side, direction)];
                 var cornerPosition = nextSide.Multiply(map.SideSize);
-                var sidePosition = position.Modulo(map.SideSize);
+                var sidePosition = position.Remainder(map.SideSize);
                 var sideMax = map.SideSize - 1;
                 if (invert)
                 {
